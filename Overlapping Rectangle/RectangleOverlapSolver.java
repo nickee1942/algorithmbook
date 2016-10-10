@@ -2,9 +2,6 @@
  * Created by yichenzhou on 10/5/16.
  */
 
-import edu.princeton.cs.algs4.StdOut;
-import edu.princeton.cs.algs4.StdRandom;
-
 public class RectangleOverlapSolver {
     private int[] inputsScale;
     public RectangleOverlapSolver(int[] inputScale) {
@@ -27,10 +24,12 @@ public class RectangleOverlapSolver {
     public Rectangle[] toLoad(int count) {
         Rectangle[] rectangles = new Rectangle[count];
         for (int i = 0; i < count; i++) {
-            double topX = StdRandom.uniform(1, count);
-            double topY = StdRandom.uniform(1, count);
-            double bottomX = StdRandom.uniform(topX+1, 2 *count);
-            double bottomY = StdRandom.uniform(0, topY);
+            double topX = Math.random() * count + 1;
+            double topY = Math.random() * count + 1;
+            double bottomX = Math.random() * count * 2 + (topX + 1);
+            double bottomY = Math.random() * topY - 1;
+            assert topX < bottomX;
+            assert topY > bottomY;
             Point topLeft = new Point(topX, topY);
             Point bottomRight = new Point(bottomX, bottomY);
             rectangles[i] = new Rectangle(topLeft, bottomRight);
@@ -52,7 +51,7 @@ public class RectangleOverlapSolver {
             itX.put(leftValue, rightValue);
             itY.put(bottomValue, topValue);
         }
-        StdOut.println(itX.size() + " pairs in the Interval Tree.");
+        System.out.println(itX.size() + " pairs in the Interval Tree.");
 
         int intersectedCount = 0;
         long timer = 0;
@@ -68,9 +67,9 @@ public class RectangleOverlapSolver {
             long endTimer = System.nanoTime();
             timer += endTimer - beginTimer;
         }
-        StdOut.println(intersectedCount + " pairs intersected rectangles.");
-        StdOut.println("Time: " + timer);
-        StdOut.println();
+        System.out.println(intersectedCount + " pairs intersected rectangles.");
+        System.out.println("Time: " + timer);
+        System.out.println();
     }
 
 }

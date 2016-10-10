@@ -72,12 +72,9 @@ public class IntervalTree {
     public Boolean search(double leftValue, double rightValue) {
         Interval neo = new Interval(leftValue, rightValue);
         if (search(root, neo) == null) {
-            //StdOut.println("[" + leftValue + " " + rightValue + "] is not intersect in this interval tree.");
             return false;
         } else {
             Interval intersected = search(root, neo);
-            //StdOut.println("[" + leftValue + " " + rightValue + "] intersected in [" + intersected.leftValue + " " + intersected.rightValue +
-            //"].");
             return true;
         }
     }
