@@ -1,25 +1,27 @@
 package algorithms.book.dandc.overlappingrectangles;
 
-/**
- * Created by yichenzhou on 10/6/16.
- */
+import java.io.FileWriter;
+import java.io.IOException;
 
-import java.text.DecimalFormat;
-import java.util.Scanner;
-
+/** Generates sample rectangle data. */
 public class RectangleGenerator {
-    public static void main(String args[]) {
-        Scanner scanner = new Scanner(System.in);
-        int count = Integer.parseInt(scanner.nextLine());
-        DecimalFormat df = new DecimalFormat("#.00");
+
+    public static void main(String args[]) throws IOException {
+        int count = Integer.parseInt(args[0]);
+        int maxLength = 1000;
+        int maxHeight = 1000;
+        FileWriter fileWriter = new FileWriter(args[1]);
+        String newLine = System.getProperty("line.separator");
         for (int i = 0; i < count; i++) {
-            double topX = Math.random() * count + 1;
-            double topY = Math.random() * count + 1;
-            double bottomX = Math.random() * count * 2 + (topX + 1);
-            double bottomY = Math.random() * topY - 1;
-            assert Double.parseDouble(df.format(topX)) < Double.parseDouble(df.format(bottomX));
-            assert Double.parseDouble(df.format(bottomY)) < Double.parseDouble(df.format(topY));
-            System.out.println("[" + df.format(topX) + " " + df.format(topY) + " " + df.format(bottomX) + " " + df.format(bottomY) + "]");
+            int topX = (int) (Math.random() * count + 1);
+            int topY = (int) (Math.random() * count + 1);
+            Point topLeft = new Point(topX, topY);
+            int widthX = (int) (Math.random() * maxLength);
+            int heightY = (int) (Math.random() * maxHeight);
+            Point bottomRight = new Point(topX + widthX, topY - heightY);
+            Rectangle rectangle = new Rectangle(topLeft, bottomRight);
+            fileWriter.write(rectangle + newLine);
         }
+        fileWriter.close();
     }
 }

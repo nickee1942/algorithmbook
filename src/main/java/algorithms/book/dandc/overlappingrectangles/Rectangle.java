@@ -20,4 +20,9 @@ public class Rectangle {
     public Point getBottomRight() {
         return bottomRight;
     }
+
+    @Override
+    public String toString() {
+        return topLeft + " " + bottomRight;
+    }
 }
