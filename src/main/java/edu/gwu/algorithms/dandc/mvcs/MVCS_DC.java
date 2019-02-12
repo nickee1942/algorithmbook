@@ -1,4 +1,4 @@
-package algorithms.book.dandc.mvcs;
+package edu.gwu.algorithms.dandc.mvcs;
 
 /** Solves MVCS problem using D&C, in n log n time. */
 public class MVCS_DC {
