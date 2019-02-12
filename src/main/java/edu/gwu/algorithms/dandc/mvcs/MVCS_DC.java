@@ -5,12 +5,28 @@ public class MVCS_DC {
 
     public int findMax(int[] a, int leftIndex, int rightIndex) {
 
-        // Base Case
-        if (leftIndex >= rightIndex - 1) {
-            return Math.max(a[leftIndex] + a[rightIndex], Math.max(a[leftIndex], a[rightIndex]));
+        // Base Cases
+        if (leftIndex > rightIndex) {
+            throw new IllegalArgumentException("Left can't be greater than right.");
+        }
+        if (leftIndex == rightIndex) {
+            return a[leftIndex];
+        }
+        if (leftIndex == rightIndex - 1) {
+            return max(a[leftIndex] + a[rightIndex], a[leftIndex], a[rightIndex]);
         }
 
-        return 0;
+        // Finds the mid point.
+        int midPoint = (leftIndex + rightIndex) / 2;
 
+        // Makes two recursive calls
+        int leftMax = findMax(a, leftIndex, midPoint);
+        int rightMax = findMax(a, midPoint + 1, rightIndex);
+        int midMax = 0; // TODO
+        return max(leftMax, rightMax, midMax);
+    }
+
+    private int max(int arg1, int arg2, int arg3) {
+        return Math.max(arg1, Math.max(arg2, arg3));
     }
 }
