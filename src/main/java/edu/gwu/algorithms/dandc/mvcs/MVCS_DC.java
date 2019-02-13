@@ -1,8 +1,12 @@
 package edu.gwu.algorithms.dandc.mvcs;
 
-/** Solves MVCS problem using D&C, in n log n time. */
-public class MVCS_DC {
+import edu.gwu.algorithms.problems.MVCS;
+import edu.gwu.algorithms.utils.Utils;
 
+/** Solves MVCS problem using D&C, in n log n time. */
+public class MVCS_DC implements MVCS {
+
+    /** Finds the maximum value CS in a, given left and right indices, both inclusive. */
     public int findMax(int[] a, int leftIndex, int rightIndex) {
 
         // Base Cases
@@ -13,7 +17,7 @@ public class MVCS_DC {
             return a[leftIndex];
         }
         if (leftIndex == rightIndex - 1) {
-            return max(a[leftIndex] + a[rightIndex], a[leftIndex], a[rightIndex]);
+            return Utils.max(a[leftIndex] + a[rightIndex], a[leftIndex], a[rightIndex]);
         }
 
         // Finds the mid point.
@@ -22,11 +26,31 @@ public class MVCS_DC {
         // Makes two recursive calls
         int leftMax = findMax(a, leftIndex, midPoint);
         int rightMax = findMax(a, midPoint + 1, rightIndex);
-        int midMax = 0; // TODO
-        return max(leftMax, rightMax, midMax);
+        int midMax = findMidMax(a, leftIndex, rightIndex, midPoint);
+        return Utils.max(leftMax, rightMax, midMax);
     }
 
-    private int max(int arg1, int arg2, int arg3) {
-        return Math.max(arg1, Math.max(arg2, arg3));
+    /** Finds the "middle max", such that the midpoint and the point to the right of point point is always included.. */
+    private int findMidMax(int[] a, int leftIndex, int rightIndex, int midPoint) {
+        int rightMax = uniMax(a, midPoint + 1, rightIndex, 1);
+        int leftMax = uniMax(a, midPoint, leftIndex, -1);
+        return leftMax + rightMax;
+    }
+
+    private int uniMax(int[] a, int startIndex, int endIndex, int direction) {
+        int unimax = a[startIndex];
+        int unisum = a[startIndex];
+        int index = startIndex + direction;
+        while (index <= endIndex && index >= 0) {
+            unisum += a[index];
+            unimax = Math.max(unimax, unisum);
+            index += direction;
+        }
+        return unimax;
+    }
+
+    @Override
+    public int findMax(int[] array) {
+        return findMax(array, 0, array.length - 1);
     }
 }
