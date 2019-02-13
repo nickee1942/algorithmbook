@@ -1,4 +1,4 @@
-package algorithms.book.core;
+package edu.gwu.algorithms.asymptotic;
 
 import java.util.List;
 

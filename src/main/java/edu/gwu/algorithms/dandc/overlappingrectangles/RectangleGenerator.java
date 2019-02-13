@@ -1,4 +1,4 @@
-package algorithms.book.dandc.overlappingrectangles;
+package edu.gwu.algorithms.dandc.overlappingrectangles;
 
 import java.io.FileWriter;
 import java.io.IOException;

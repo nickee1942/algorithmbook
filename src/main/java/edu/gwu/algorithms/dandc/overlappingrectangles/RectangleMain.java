@@ -1,4 +1,4 @@
-package algorithms.book.dandc.overlappingrectangles;
+package edu.gwu.algorithms.dandc.overlappingrectangles;
 
 /**
  * Created by yichenzhou on 10/5/16.
