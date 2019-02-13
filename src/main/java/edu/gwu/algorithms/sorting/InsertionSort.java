@@ -1,4 +1,4 @@
-package edu.gwu.cs6212;
+package edu.gwu.algorithms.sorting;
 
 public class InsertionSort {
 
